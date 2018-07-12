@@ -11,6 +11,7 @@
 #include <netdb.h>
 
 extern volatile uint8_t work;
+extern struct Proxy_Configuration configuration;
 
 #define MAXBUF 4096
 struct
@@ -92,8 +93,8 @@ void* start_proxy_dns(void *param)
 	}
 
 	server_address.sin_family = AF_INET;
-	server_address.sin_addr.s_addr = htonl(INADDR_ANY);
-	server_address.sin_port = htons(53);
+	server_address.sin_addr.s_addr = htonl(configuration.local_address);
+	server_address.sin_port = htons(configuration.dns_port);
 
 	if (bind(fd_server, (struct sockaddr *) &server_address, sizeof(server_address)) < 0)
 	{
@@ -110,7 +111,7 @@ void* start_proxy_dns(void *param)
 
 	printf("DNS UDP port is %d\n", ntohs(server_address.sin_port));
 
-	client_address.sin_addr.s_addr = inet_addr("8.8.8.8");
+	client_address.sin_addr.s_addr = htonl(configuration.remote_address);
 	client_address.sin_port = htons(53);
 	client_address.sin_family = AF_INET;
 
