@@ -27,6 +27,10 @@ struct DNS_Answer
 	uint16_t Name_Offset;
 	uint16_t Type;
 	uint16_t Class;
+	uint32_t TTL;
+
+	uint16_t Size;
+	uint8_t *Data;
 };
 
 struct DNS_Format
@@ -41,4 +45,7 @@ struct DNS_Format
 
 	struct DNS_Request *Queries;
 	struct DNS_Answer *Answer;
+
+	uint8_t *Access_Records;
+	uint8_t *Additional_Records;
 };
