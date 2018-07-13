@@ -83,18 +83,6 @@ int main(int argc, char **argv)
 	configuration.redirect_address = get_ip_address("blacklist", "redirect", 0xFFFFFFFF);
 	get_list();
 
-	uint8_t data[23] = {0x5e,0x4c,0x1,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x0,0x2,0x37,0x34,0x2,0x72,0x75,0x0,0x0,0x1,0x0,0x1};
-	uint8_t data_c[23];
-	struct DNS_Format* format = DNS_DeSerialize(data, 23);
-
-	DNS_Remove_Queries("ya.ru");
-
-	DNS_Serialize(data_c, 23);
-
-	int n = memcmp(data, data_c, 23);
-
-	DNS_Free();
-
 	ini_free(config);
 
 	pthread_create(&proxy_dns, NULL, start_proxy_dns, NULL);

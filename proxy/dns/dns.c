@@ -50,20 +50,29 @@ void DNS_Free()
 	if (dns.Queries != NULL)
 	{
 		for (uint32_t i = 0; i < dns.Queries_Size; ++i)
+		{
 			free(dns.Queries[i].Request_Name);
+			dns.Queries[i].Request_Name = NULL;
+		}
 
 		free(dns.Queries);
+		dns.Queries = NULL;
 	}
 
 	if (dns.Answers != NULL)
 	{
 		for (uint32_t i = 0; i < dns.Answers_Size; ++i)
+		{
 			free(dns.Answers[i].Data);
+			dns.Answers[i].Data = NULL;
+		}
 
 		free(dns.Answers);
+		dns.Answers = NULL;
 	}
 
 	free(dns.Other);
+	dns.Other = NULL;
 }
 
 struct DNS_Format* DNS_DeSerialize(uint8_t *data, uint32_t size)
@@ -183,7 +192,6 @@ struct DNS_Format* DNS_DeSerialize(uint8_t *data, uint32_t size)
 
 uint32_t DNS_Serialize(uint8_t *data, uint32_t max)
 {
-	const uint8_t start_data_field = 12;
 	uint32_t size = 0;
 
 	if (data == NULL)
@@ -344,7 +352,6 @@ void DNS_Redirect_Answers(const char* name, uint32_t ip_address)
 	}
 
 	free(dns.Answers);
-
 	dns.Answers = Answers;
 
 	for (uint32_t i = dns.Answers_Size; i < dns.Answers_Size + count; i++)
