@@ -134,6 +134,8 @@ struct DNS_Format* DNS_DeSerialize(uint8_t *data, uint32_t size)
 
 		dns.Queries[i].Request_Class = data[start_data_field + domain_size + 3] << 8;
 		dns.Queries[i].Request_Class |= data[start_data_field + domain_size + 4];
+
+		dns.Queries[i].status = 0x00;
 	}
 
 	uint32_t start_answers_field = start_data_field + domain_size + 5;
@@ -209,8 +211,15 @@ uint32_t DNS_Serialize(uint8_t *data, uint32_t max)
 	data[size++] = dns.Additionals_Size >> 8;
 	data[size++] = dns.Additionals_Size;
 
+	uint8_t queries_offset = 0;
 	for (uint32_t i = 0; i < dns.Queries_Size; ++i)
 	{
+		if (dns.Queries[i].status == 0xFF)
+		{
+			queries_offset++;
+			continue;
+		}
+
 		char name[4096];
 		strcpy(name, dns.Queries[i].Request_Name);
 
@@ -229,12 +238,15 @@ uint32_t DNS_Serialize(uint8_t *data, uint32_t max)
 		}
 		data[size++] = 0x00;
 
-		data[size++] = dns.Queries[i].Request_Type >> 8;
-		data[size++] = dns.Queries[i].Request_Type;
+		data[size++] = dns.Queries[i - queries_offset].Request_Type >> 8;
+		data[size++] = dns.Queries[i - queries_offset].Request_Type;
 
-		data[size++] = dns.Queries[i].Request_Class >> 8;
-		data[size++] = dns.Queries[i].Request_Class;
+		data[size++] = dns.Queries[i - queries_offset].Request_Class >> 8;
+		data[size++] = dns.Queries[i - queries_offset].Request_Class;
 	}
+	uint32_t quer_size = dns.Queries_Size - queries_offset;
+	data[4] = quer_size >> 8;
+	data[5] = quer_size;
 
 	for (uint32_t i = 0; i < dns.Answers_Size; ++i)
 	{
@@ -263,4 +275,47 @@ uint32_t DNS_Serialize(uint8_t *data, uint32_t max)
 		data[size++] = dns.Other[i];
 
 	return size;
+}
+
+const char* DNS_Find_Queries(const char* name)
+{
+	if (name == NULL || dns.Queries_Size == 0)
+		return NULL;
+
+	for (uint32_t i = 0; i < dns.Queries_Size; ++i)
+	{
+		const char* path = strstr(dns.Queries[i].Request_Name, name);
+		if (path != NULL)
+			return dns.Queries[i].Request_Name;
+	}
+
+	return NULL;
+}
+
+void DNS_Remove_Queries(const char* name)
+{
+	if (name == NULL || dns.Queries_Size == 0)
+		return;
+
+	for (uint32_t i = 0; i < dns.Queries_Size; ++i)
+	{
+		const char* path = strstr(dns.Queries[i].Request_Name, name);
+		if (path != NULL)
+			dns.Queries[i].status = 0xFF;
+	}
+}
+
+void DNS_Redirect_Answers(const char* name, uint32_t ip_address)
+{
+	if (dns.Queries_Size == 0)
+		return;
+
+	for (uint32_t i = 0; i < dns.Queries_Size; ++i)
+	{
+		const char* path = strstr(dns.Queries[i].Request_Name, name);
+		if (path != NULL)
+		{
+
+		}
+	}
 }

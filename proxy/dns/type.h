@@ -20,6 +20,8 @@ struct DNS_Request
 	char *Request_Name;
 	uint16_t Request_Type;
 	uint16_t Request_Class;
+
+	uint8_t status;
 };
 
 struct DNS_Answer
