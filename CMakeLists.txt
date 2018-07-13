@@ -13,14 +13,15 @@ endif()
 project(dns_proxy VERSION ${VERSION_BUILD_MAJOR}.${VERSION_BUILD_MINOR}.${VERSION_BUILD})
 
 find_package (Threads)
-#configure_file(version.h.in ${HEADER_PATH}/version.h)
 
 set(INI_PATH "${PROJECT_SOURCE_DIR}/ini/src")
 
 set(HEADER_FILES defines.h proxy/proxy.h proxy/dns/dns.h proxy/dns/type.h ${INI_PATH}/ini.h)
 set(SOURCE_FILES signal_handler.c proxy/proxy.c proxy/dns/dns.c ${INI_PATH}/ini.c)
 
-add_executable(dns_proxy ${PROJECT_SOURCE_DIR}/main.c ${HEADER_FILES} ${SOURCE_FILES})
+configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
+
+add_executable(dns_proxy ${PROJECT_SOURCE_DIR}/main.c ${HEADER_FILES} ${SOURCE_FILES} version.h)
 
 set_target_properties(dns_proxy PROPERTIES
   C_STANDARD 11
@@ -30,10 +31,10 @@ set_target_properties(dns_proxy PROPERTIES
 
 target_link_libraries (dns_proxy ${CMAKE_THREAD_LIBS_INIT})
 
-
 install(TARGETS dns_proxy RUNTIME DESTINATION bin COMPONENT dns_proxy)
 
 set(CPACK_GENERATOR DEB)
+SET(CPACK_SYSTEM_NAME "amd64")
 
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")

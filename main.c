@@ -11,6 +11,7 @@
 
 #include "proxy/proxy.h"
 #include "ini/src/ini.h"
+#include "version.h"
 
 void signal_handler(int _signal);
 
@@ -75,6 +76,13 @@ int main(int argc, char **argv)
 	signal(SIGHUP, signal_handler);
 
 	config = ini_load("config.ini");
+
+	#ifdef PROJECT_VERSION_MINOR
+	printf("Dns proxy version %u.%u.%u\n", PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
+	#else
+	printf("Dns proxy version %u.%u.%u\n", PROJECT_VERSION_MAJOR, 0, PROJECT_VERSION_PATCH);
+	#endif
+	printf("\n");
 
 	if (config != NULL)
 	{
