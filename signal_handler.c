@@ -1,3 +1,10 @@
+/*!
+\file
+\brief Signal Handlers
+
+Exit application with interruption signals
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>

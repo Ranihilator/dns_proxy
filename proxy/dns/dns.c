@@ -1,3 +1,8 @@
+/*!
+\file
+\brief DNS Frame parser
+*/
+
 #include "dns.h"
 
 #include <stdio.h>

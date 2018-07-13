@@ -1,3 +1,8 @@
+/*!
+\file
+\brief Proxy thread to dns proxy exchange data
+*/
+
 #include "proxy.h"
 
 #include <stdio.h>

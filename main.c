@@ -1,3 +1,10 @@
+/*!
+\file
+\brief Main application
+
+Load configuration and start thread dns proxy exchange
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
