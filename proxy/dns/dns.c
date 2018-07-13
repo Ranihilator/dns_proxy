@@ -101,9 +101,6 @@ struct DNS_Format* DNS_DeSerialize(uint8_t *data, uint32_t size)
 	dns.Additionals_Size = data[10];
 	dns.Additionals_Size |= data[11];
 
-	if (dns.Queries_Size == 0)
-		return NULL;
-
 	dns.Queries = (struct DNS_Request *)malloc(dns.Queries_Size * sizeof(struct DNS_Request));
 	dns.Answers = (struct DNS_Answer *)malloc(dns.Answers_Size * sizeof(struct DNS_Answer));
 
@@ -216,6 +213,33 @@ uint32_t DNS_Serialize(uint8_t *data, uint32_t max)
 
 	data[size++] = dns.Additionals_Size >> 8;
 	data[size++] = dns.Additionals_Size;
+
+	for (uint32_t i = 0; i < dns.Queries_Size; ++i)
+	{
+		char name[4096];
+		strcpy(name, dns.Queries[i].Request_Name);
+
+		char* res = strtok(name, ".");
+
+		while (res != NULL)
+		{
+			uint32_t s = strlen(res);
+
+			data[size++] = s;
+
+			strncpy((char*)&data[size], res, s);
+			size += s;
+
+			res = strtok(NULL, ".");
+		}
+		data[size++] = 0x00;
+
+		data[size++] = dns.Queries[i].Request_Type >> 8;
+		data[size++] = dns.Queries[i].Request_Type;
+
+		data[size++] = dns.Queries[i].Request_Class >> 8;
+		data[size++] = dns.Queries[i].Request_Class;
+	}
 
 	return size;
 }
