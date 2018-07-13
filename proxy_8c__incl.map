@@ -1,5 +1,5 @@
 <map id="proxy/proxy.c" name="proxy/proxy.c">
-<area shape="rect" id="node2" href="$proxy_8h.html" title="proxy.h" alt="" coords="11,80,76,107"/>
-<area shape="rect" id="node3" href="$dns_8h.html" title="dns/dns.h" alt="" coords="5,155,83,181"/>
-<area shape="rect" id="node4" href="$type_8h.html" title="type.h" alt="" coords="15,229,72,256"/>
+<area shape="rect" id="node2" href="$proxy_8h.html" title="Header proxy thread. " alt="" coords="11,80,76,107"/>
+<area shape="rect" id="node3" href="$dns_8h.html" title="DNS Frame Parser Header. " alt="" coords="5,155,83,181"/>
+<area shape="rect" id="node4" href="$type_8h.html" title="DNS Frame Type Header for parser. " alt="" coords="15,229,72,256"/>
 </map>

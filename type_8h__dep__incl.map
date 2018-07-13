@@ -1,8 +1,8 @@
 <map id="proxy/dns/type.h" name="proxy/dns/type.h">
-<area shape="rect" id="node2" href="$dns_8h.html" title="proxy/dns/dns.h" alt="" coords="71,80,185,107"/>
-<area shape="rect" id="node3" href="$dns_8c.html" title="proxy/dns/dns.c" alt="" coords="5,155,120,181"/>
-<area shape="rect" id="node4" href="$proxy_8h.html" title="proxy/proxy.h" alt="" coords="144,155,245,181"/>
-<area shape="rect" id="node5" href="$proxy_8c.html" title="proxy/proxy.c" alt="" coords="39,229,140,256"/>
-<area shape="rect" id="node6" href="$main_8c.html" title="main.c" alt="" coords="164,229,225,256"/>
-<area shape="rect" id="node7" href="$signal__handler_8c.html" title="signal_handler.c" alt="" coords="250,229,365,256"/>
+<area shape="rect" id="node2" href="$dns_8h.html" title="DNS Frame Parser Header. " alt="" coords="71,80,185,107"/>
+<area shape="rect" id="node3" href="$dns_8c.html" title="DNS Frame parser. " alt="" coords="5,155,120,181"/>
+<area shape="rect" id="node4" href="$proxy_8h.html" title="Header proxy thread. " alt="" coords="144,155,245,181"/>
+<area shape="rect" id="node5" href="$proxy_8c.html" title="Proxy thread to dns proxy exchange data. " alt="" coords="39,229,140,256"/>
+<area shape="rect" id="node6" href="$main_8c.html" title="Main application. " alt="" coords="164,229,225,256"/>
+<area shape="rect" id="node7" href="$signal__handler_8c.html" title="Signal Handlers. " alt="" coords="250,229,365,256"/>
 </map>

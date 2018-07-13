@@ -67,42 +67,58 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Main DNS struct.  
+ <a href="structDNS__Format.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="type_8h_source.html">type.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for DNS_Format:</div>
 <div class="dyncontent">
 <div class="center"><img src="structDNS__Format__coll__graph.png" border="0" usemap="#DNS__Format_coll__map" alt="Collaboration graph"/></div>
 <map name="DNS__Format_coll__map" id="DNS__Format_coll__map">
-<area shape="rect" id="node2" href="structDNS__Flags.html" title="DNS_Flags" alt="" coords="5,5,96,32"/>
-<area shape="rect" id="node3" href="structDNS__Answer.html" title="DNS_Answer" alt="" coords="121,5,223,32"/>
-<area shape="rect" id="node4" href="structDNS__Request.html" title="DNS_Request" alt="" coords="248,5,355,32"/>
+<area shape="rect" id="node2" href="structDNS__Flags.html" title="DNS Flags struct. " alt="" coords="5,5,96,32"/>
+<area shape="rect" id="node3" href="structDNS__Answer.html" title="DNS Answer struct. " alt="" coords="121,5,223,32"/>
+<area shape="rect" id="node4" href="structDNS__Request.html" title="DNS Request struct. " alt="" coords="248,5,355,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aa62efa79d302295ddde26a84a3a75f2b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Format.html#aa62efa79d302295ddde26a84a3a75f2b">Identification</a></td></tr>
+<tr class="memdesc:aa62efa79d302295ddde26a84a3a75f2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS Identification frame.  <a href="#aa62efa79d302295ddde26a84a3a75f2b">More...</a><br /></td></tr>
 <tr class="separator:aa62efa79d302295ddde26a84a3a75f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae78fc6b94beba400062546e951d2eb23"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structDNS__Flags.html">DNS_Flags</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Format.html#ae78fc6b94beba400062546e951d2eb23">Flags</a></td></tr>
+<tr class="memdesc:ae78fc6b94beba400062546e951d2eb23"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS Flags.  <a href="#ae78fc6b94beba400062546e951d2eb23">More...</a><br /></td></tr>
 <tr class="separator:ae78fc6b94beba400062546e951d2eb23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18500507015958bbf6131b553e739068"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Format.html#a18500507015958bbf6131b553e739068">Queries_Size</a></td></tr>
+<tr class="memdesc:a18500507015958bbf6131b553e739068"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queries Size DNS nodes.  <a href="#a18500507015958bbf6131b553e739068">More...</a><br /></td></tr>
 <tr class="separator:a18500507015958bbf6131b553e739068"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5af34c54a5c9f784570bdc6bdf11f93e"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Format.html#a5af34c54a5c9f784570bdc6bdf11f93e">Answers_Size</a></td></tr>
+<tr class="memdesc:a5af34c54a5c9f784570bdc6bdf11f93e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Answers Size DNS nodes.  <a href="#a5af34c54a5c9f784570bdc6bdf11f93e">More...</a><br /></td></tr>
 <tr class="separator:a5af34c54a5c9f784570bdc6bdf11f93e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a788ed5d9e8329ee1dbd482eee508d99d"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Format.html#a788ed5d9e8329ee1dbd482eee508d99d">Authority_Size</a></td></tr>
+<tr class="memdesc:a788ed5d9e8329ee1dbd482eee508d99d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Authority Size DNS nodes (in current version parser not used)  <a href="#a788ed5d9e8329ee1dbd482eee508d99d">More...</a><br /></td></tr>
 <tr class="separator:a788ed5d9e8329ee1dbd482eee508d99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e3e6277bddcce2325f1cfa7972c4337"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Format.html#a1e3e6277bddcce2325f1cfa7972c4337">Additionals_Size</a></td></tr>
+<tr class="memdesc:a1e3e6277bddcce2325f1cfa7972c4337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Additionals Size DNS nodes (in current version parser not used)  <a href="#a1e3e6277bddcce2325f1cfa7972c4337">More...</a><br /></td></tr>
 <tr class="separator:a1e3e6277bddcce2325f1cfa7972c4337"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fb8f99f9aee422fd4bba77dcee4452f"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structDNS__Request.html">DNS_Request</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Format.html#a4fb8f99f9aee422fd4bba77dcee4452f">Queries</a></td></tr>
+<tr class="memdesc:a4fb8f99f9aee422fd4bba77dcee4452f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queries Data.  <a href="#a4fb8f99f9aee422fd4bba77dcee4452f">More...</a><br /></td></tr>
 <tr class="separator:a4fb8f99f9aee422fd4bba77dcee4452f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5d72c24c866e83280b2bcf87dae5fa8"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structDNS__Answer.html">DNS_Answer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Format.html#ab5d72c24c866e83280b2bcf87dae5fa8">Answers</a></td></tr>
+<tr class="memdesc:ab5d72c24c866e83280b2bcf87dae5fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Answer Data.  <a href="#ab5d72c24c866e83280b2bcf87dae5fa8">More...</a><br /></td></tr>
 <tr class="separator:ab5d72c24c866e83280b2bcf87dae5fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a31460e39cbce73aa5f6489b839c1e7"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Format.html#a6a31460e39cbce73aa5f6489b839c1e7">Other</a></td></tr>
+<tr class="memdesc:a6a31460e39cbce73aa5f6489b839c1e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Authority and Additionals Data (Nodes not analyze, just copy to proxy)  <a href="#a6a31460e39cbce73aa5f6489b839c1e7">More...</a><br /></td></tr>
 <tr class="separator:a6a31460e39cbce73aa5f6489b839c1e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7125042c43681b5761fd628d0ddbe04"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Format.html#ad7125042c43681b5761fd628d0ddbe04">Size</a></td></tr>
+<tr class="memdesc:ad7125042c43681b5761fd628d0ddbe04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of Other data.  <a href="#ad7125042c43681b5761fd628d0ddbe04">More...</a><br /></td></tr>
 <tr class="separator:ad7125042c43681b5761fd628d0ddbe04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Main DNS struct. </p>
+<p>All DNS working Data from parser </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a1e3e6277bddcce2325f1cfa7972c4337"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e3e6277bddcce2325f1cfa7972c4337">&#9670;&nbsp;</a></span>Additionals_Size</h2>
 
@@ -114,6 +130,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Additionals Size DNS nodes (in current version parser not used) </p>
 
 </div>
 </div>
@@ -129,6 +147,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Answer Data. </p>
+
 </div>
 </div>
 <a id="a5af34c54a5c9f784570bdc6bdf11f93e"></a>
@@ -142,6 +162,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Answers Size DNS nodes. </p>
 
 </div>
 </div>
@@ -157,6 +179,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Authority Size DNS nodes (in current version parser not used) </p>
+
 </div>
 </div>
 <a id="ae78fc6b94beba400062546e951d2eb23"></a>
@@ -170,6 +194,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>DNS Flags. </p>
 
 </div>
 </div>
@@ -185,6 +211,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>DNS Identification frame. </p>
+
 </div>
 </div>
 <a id="a6a31460e39cbce73aa5f6489b839c1e7"></a>
@@ -198,6 +226,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Authority and Additionals Data (Nodes not analyze, just copy to proxy) </p>
 
 </div>
 </div>
@@ -213,6 +243,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Queries Data. </p>
+
 </div>
 </div>
 <a id="a18500507015958bbf6131b553e739068"></a>
@@ -227,6 +259,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Queries Size DNS nodes. </p>
+
 </div>
 </div>
 <a id="ad7125042c43681b5761fd628d0ddbe04"></a>
@@ -240,6 +274,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Size of Other data. </p>
 
 </div>
 </div>

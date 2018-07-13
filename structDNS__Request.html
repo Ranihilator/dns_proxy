@@ -67,20 +67,30 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>DNS Request struct.  
+ <a href="structDNS__Request.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="type_8h_source.html">type.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a32e34b74a0273d14244a8ab35383b0c5"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Request.html#a32e34b74a0273d14244a8ab35383b0c5">Request_Name</a></td></tr>
+<tr class="memdesc:a32e34b74a0273d14244a8ab35383b0c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS format text (example 2ya2ru) -&gt; ya.ru.  <a href="#a32e34b74a0273d14244a8ab35383b0c5">More...</a><br /></td></tr>
 <tr class="separator:a32e34b74a0273d14244a8ab35383b0c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69f14e6ec5457217e62c71426ead569c"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Request.html#a69f14e6ec5457217e62c71426ead569c">Request_Type</a></td></tr>
+<tr class="memdesc:a69f14e6ec5457217e62c71426ead569c"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS Type.  <a href="#a69f14e6ec5457217e62c71426ead569c">More...</a><br /></td></tr>
 <tr class="separator:a69f14e6ec5457217e62c71426ead569c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9525ab8370a0ae3a862511033c9f9d83"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Request.html#a9525ab8370a0ae3a862511033c9f9d83">Request_Class</a></td></tr>
+<tr class="memdesc:a9525ab8370a0ae3a862511033c9f9d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS Class.  <a href="#a9525ab8370a0ae3a862511033c9f9d83">More...</a><br /></td></tr>
 <tr class="separator:a9525ab8370a0ae3a862511033c9f9d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1da76dd566e376e987a9bd04ecd944a5"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNS__Request.html#a1da76dd566e376e987a9bd04ecd944a5">status</a></td></tr>
+<tr class="memdesc:a1da76dd566e376e987a9bd04ecd944a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS status (0 - using, 0xFF - deleted, parser will be ignored node)  <a href="#a1da76dd566e376e987a9bd04ecd944a5">More...</a><br /></td></tr>
 <tr class="separator:a1da76dd566e376e987a9bd04ecd944a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>DNS Request struct. </p>
+<p>One of nodes DNS data </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="structDNS__Format.html" title="Main DNS struct. ">DNS_Format</a> </dd></dl>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a9525ab8370a0ae3a862511033c9f9d83"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9525ab8370a0ae3a862511033c9f9d83">&#9670;&nbsp;</a></span>Request_Class</h2>
 
@@ -92,6 +102,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>DNS Class. </p>
 
 </div>
 </div>
@@ -107,6 +119,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>DNS format text (example 2ya2ru) -&gt; ya.ru. </p>
+
 </div>
 </div>
 <a id="a69f14e6ec5457217e62c71426ead569c"></a>
@@ -121,6 +135,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>DNS Type. </p>
+
 </div>
 </div>
 <a id="a1da76dd566e376e987a9bd04ecd944a5"></a>
@@ -134,6 +150,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>DNS status (0 - using, 0xFF - deleted, parser will be ignored node) </p>
 
 </div>
 </div>

@@ -1,5 +1,5 @@
 <map id="proxy/proxy.h" name="proxy/proxy.h">
-<area shape="rect" id="node2" href="$proxy_8c.html" title="proxy/proxy.c" alt="" coords="5,80,107,107"/>
-<area shape="rect" id="node3" href="$main_8c.html" title="main.c" alt="" coords="131,80,192,107"/>
-<area shape="rect" id="node4" href="$signal__handler_8c.html" title="signal_handler.c" alt="" coords="217,80,332,107"/>
+<area shape="rect" id="node2" href="$proxy_8c.html" title="Proxy thread to dns proxy exchange data. " alt="" coords="5,80,107,107"/>
+<area shape="rect" id="node3" href="$main_8c.html" title="Main application. " alt="" coords="131,80,192,107"/>
+<area shape="rect" id="node4" href="$signal__handler_8c.html" title="Signal Handlers. " alt="" coords="217,80,332,107"/>
 </map>

@@ -1,5 +1,5 @@
 <map id="DNS_Format" name="DNS_Format">
-<area shape="rect" id="node2" href="$structDNS__Flags.html" title="DNS_Flags" alt="" coords="5,5,96,32"/>
-<area shape="rect" id="node3" href="$structDNS__Answer.html" title="DNS_Answer" alt="" coords="121,5,223,32"/>
-<area shape="rect" id="node4" href="$structDNS__Request.html" title="DNS_Request" alt="" coords="248,5,355,32"/>
+<area shape="rect" id="node2" href="$structDNS__Flags.html" title="DNS Flags struct. " alt="" coords="5,5,96,32"/>
+<area shape="rect" id="node3" href="$structDNS__Answer.html" title="DNS Answer struct. " alt="" coords="121,5,223,32"/>
+<area shape="rect" id="node4" href="$structDNS__Request.html" title="DNS Request struct. " alt="" coords="248,5,355,32"/>
 </map>

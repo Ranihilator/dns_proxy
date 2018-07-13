@@ -70,6 +70,9 @@ $(function() {
 <div class="title">dns.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>DNS Frame parser.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="dns_8h_source.html">dns.h</a>&quot;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
@@ -79,24 +82,30 @@ Include dependency graph for dns.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="dns_8c__incl.png" border="0" usemap="#proxy_2dns_2dns_8c" alt=""/></div>
 <map name="proxy_2dns_2dns_8c" id="proxy_2dns_2dns_8c">
-<area shape="rect" id="node2" href="dns_8h.html" title="dns.h" alt="" coords="10,80,64,107"/>
-<area shape="rect" id="node3" href="type_8h.html" title="type.h" alt="" coords="8,155,65,181"/>
+<area shape="rect" id="node2" href="dns_8h.html" title="DNS Frame Parser Header. " alt="" coords="10,80,64,107"/>
+<area shape="rect" id="node3" href="type_8h.html" title="DNS Frame Type Header for parser. " alt="" coords="8,155,65,181"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a87b76454a3c57c7d75e243416bff6357"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dns_8c.html#a87b76454a3c57c7d75e243416bff6357">DNS_Free</a> ()</td></tr>
+<tr class="memdesc:a87b76454a3c57c7d75e243416bff6357"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finish work with parser and clean.  <a href="#a87b76454a3c57c7d75e243416bff6357">More...</a><br /></td></tr>
 <tr class="separator:a87b76454a3c57c7d75e243416bff6357"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06064ea26d15bee2a2cda0d710733b36"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structDNS__Format.html">DNS_Format</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dns_8c.html#a06064ea26d15bee2a2cda0d710733b36">DNS_DeSerialize</a> (uint8_t *<a class="el" href="proxy_8c.html#ac3ec3289787013a3510bbed7084f4b2f">data</a>, uint32_t <a class="el" href="proxy_8c.html#ab2c6b258f02add8fdf4cfc7c371dd772">size</a>)</td></tr>
+<tr class="memdesc:a06064ea26d15bee2a2cda0d710733b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse dns frame from binary sequency and fill the.  <a href="#a06064ea26d15bee2a2cda0d710733b36">More...</a><br /></td></tr>
 <tr class="separator:a06064ea26d15bee2a2cda0d710733b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7a4cf288b08ce98764a0906c9a122b8"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dns_8c.html#ae7a4cf288b08ce98764a0906c9a122b8">DNS_Serialize</a> (uint8_t *<a class="el" href="proxy_8c.html#ac3ec3289787013a3510bbed7084f4b2f">data</a>, uint32_t max)</td></tr>
+<tr class="memdesc:ae7a4cf288b08ce98764a0906c9a122b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate binary sequency from.  <a href="#ae7a4cf288b08ce98764a0906c9a122b8">More...</a><br /></td></tr>
 <tr class="separator:ae7a4cf288b08ce98764a0906c9a122b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca17c2a365fb2b8fed84e701dac29cd8"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dns_8c.html#aca17c2a365fb2b8fed84e701dac29cd8">DNS_Find_Queries</a> (const char *name)</td></tr>
+<tr class="memdesc:aca17c2a365fb2b8fed84e701dac29cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the dns text.  <a href="#aca17c2a365fb2b8fed84e701dac29cd8">More...</a><br /></td></tr>
 <tr class="separator:aca17c2a365fb2b8fed84e701dac29cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae64f7f542999fd1b4446758c7f033a7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dns_8c.html#ae64f7f542999fd1b4446758c7f033a7e">DNS_Remove_Queries</a> (const char *name)</td></tr>
+<tr class="memdesc:ae64f7f542999fd1b4446758c7f033a7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove Queries node to domain text.  <a href="#ae64f7f542999fd1b4446758c7f033a7e">More...</a><br /></td></tr>
 <tr class="separator:ae64f7f542999fd1b4446758c7f033a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15315eee53fbde547abe2651aaf693e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dns_8c.html#a15315eee53fbde547abe2651aaf693e3">DNS_Redirect_Answers</a> (const char *name, uint32_t ip_address)</td></tr>
+<tr class="memdesc:a15315eee53fbde547abe2651aaf693e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert Answer node to redirect dns.  <a href="#a15315eee53fbde547abe2651aaf693e3">More...</a><br /></td></tr>
 <tr class="separator:a15315eee53fbde547abe2651aaf693e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -104,7 +113,9 @@ Variables</h2></td></tr>
 <tr class="memitem:a8c9d6fe22ab0c7dd86599de082c85371"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structDNS__Format.html">DNS_Format</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dns_8c.html#a8c9d6fe22ab0c7dd86599de082c85371">dns</a></td></tr>
 <tr class="separator:a8c9d6fe22ab0c7dd86599de082c85371"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>DNS Frame parser. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="a06064ea26d15bee2a2cda0d710733b36"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a06064ea26d15bee2a2cda0d710733b36">&#9670;&nbsp;</a></span>DNS_DeSerialize()</h2>
 
@@ -131,6 +142,17 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Parse dns frame from binary sequency and fill the. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="structDNS__Format.html" title="Main DNS struct. ">DNS_Format</a> struct </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>- pointet to the data </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>- data size </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structDNS__Format.html" title="Main DNS struct. ">DNS_Format</a> pointer, or return NULL if parser failed </dd></dl>
+
 </div>
 </div>
 <a id="aca17c2a365fb2b8fed84e701dac29cd8"></a>
@@ -149,6 +171,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Find the dns text. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>- text data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>finded text </dd></dl>
+
 </div>
 </div>
 <a id="a87b76454a3c57c7d75e243416bff6357"></a>
@@ -165,6 +196,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Finish work with parser and clean. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="structDNS__Format.html" title="Main DNS struct. ">DNS_Format</a> struct </dd></dl>
 
 </div>
 </div>
@@ -194,6 +228,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Insert Answer node to redirect dns. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="structDNS__Format.html" title="Main DNS struct. ">DNS_Format</a> struct </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>- domain text in normal mode (example ya.ru) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ip_address</td><td>- ip address to redirect </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ae64f7f542999fd1b4446758c7f033a7e"></a>
@@ -211,6 +255,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Remove Queries node to domain text. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="structDNS__Format.html" title="Main DNS struct. ">DNS_Format</a> struct </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>- domain text in normal mode (example ya.ru) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -239,6 +292,17 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Generate binary sequency from. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="structDNS__Format.html" title="Main DNS struct. ">DNS_Format</a> struct </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">data</td><td>- pointer to the data </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>- max capacity of data from pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>real size </dd></dl>
 
 </div>
 </div>
