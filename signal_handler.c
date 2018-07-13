@@ -13,7 +13,7 @@ volatile uint8_t work = 0xFF;
 void signal_handler(int _signal)
 {
 	work = 0;
-	printf("KILL\n");
+	printf("KILL %u\n", _signal);
 	pthread_join(proxy_dns, NULL);
 
 	for (uint32_t i = 0; i < configuration.size; ++i)

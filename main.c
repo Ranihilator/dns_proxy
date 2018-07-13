@@ -76,14 +76,26 @@ int main(int argc, char **argv)
 
 	config = ini_load("config.ini");
 
-	ini_sget(config, "dns", "dns_port", "%u", &configuration.dns_port);
+	if (config != NULL)
+	{
+		printf("Load config.ini\n");
+		ini_sget(config, "dns", "dns_port", "%u", &configuration.dns_port);
 
-	configuration.local_address = get_ip_address("dns", "dns_local", 0x00);
-	configuration.remote_address = get_ip_address("dns", "dns_server", 0x08080808);
-	configuration.redirect_address = get_ip_address("blacklist", "redirect", 0xFFFFFFFF);
-	get_list();
+		configuration.local_address = get_ip_address("dns", "dns_local", 0x00);
+		configuration.remote_address = get_ip_address("dns", "dns_server", 0x08080808);
+		configuration.redirect_address = get_ip_address("blacklist", "redirect", 0xFFFFFFFF);
+		get_list();
 
-	ini_free(config);
+		ini_free(config);
+	}
+	else
+		printf("could not find config.ini, loading default\n");
+
+	printf("dns server local %u.%u.%u.%u:%u \n", (uint8_t)(configuration.local_address >> 24), (uint8_t)(configuration.local_address >> 16), (uint8_t)(configuration.local_address >> 8), (uint8_t)configuration.local_address, configuration.dns_port);
+	printf("dns server remote %u.%u.%u.%u \n", (uint8_t)(configuration.remote_address >> 24), (uint8_t)(configuration.remote_address >> 16), (uint8_t)(configuration.remote_address >> 8), (uint8_t)configuration.remote_address);
+	printf("redirect ip %u.%u.%u.%u \n", (uint8_t)(configuration.redirect_address >> 24), (uint8_t)(configuration.redirect_address >> 16), (uint8_t)(configuration.redirect_address >> 8), (uint8_t)configuration.redirect_address);
+
+	printf("\n");
 
 	pthread_create(&proxy_dns, NULL, start_proxy_dns, NULL);
 

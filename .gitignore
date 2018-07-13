@@ -28,6 +28,8 @@
 
 # Executables
 *.exe
+*.deb
+*.bak
 *.out
 *.app
 *.cbp
@@ -35,3 +37,6 @@
 *.depend
 bin
 Object
+build
+doc
+dist

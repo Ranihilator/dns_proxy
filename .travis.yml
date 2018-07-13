@@ -1,0 +1,30 @@
+notifications:
+  email: false
+
+language: cpp
+
+before_script:
+  - sudo apt-get install libboost-test-dev -y
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq g++-7 gcc-7 valgrind ltrace graphviz
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90
+  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 90
+  - wget https://github.com/doxygen/doxygen/archive/Release_1_8_13.tar.gz
+  - tar xpvf Release_1_8_13.tar.gz
+  - pushd doxygen-Release_1_8_13
+  - cmake -DCMAKE_INSTALL_PREFIX=/usr .
+  - sudo make install
+  - popd
+script: bash ./.travis_script.sh build
+deploy:
+  - provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    keep-history: true
+    local-dir: doc
+    on:
+      branch: master
+  - provider: script
+    skip_cleanup: true
+    script: bash ./.travis_script.sh deploy
