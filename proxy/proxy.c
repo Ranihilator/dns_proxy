@@ -29,17 +29,16 @@ static void dump(const char *text)
 	for (int i = 0; i < buffer.size; ++i)
 		printf("0x%x ",buffer.data[i]);
 
-	printf("\n");
-
-	for (int i = 0; i < buffer.size; ++i)
-		printf("%c ",buffer.data[i]);
-
-	printf("\n");
+	printf("\n\n");
 }
 
-static void blacklist_check()
+static uint32_t blacklist_check()
 {
+	uint32_t query = 0;
+
 	struct DNS_Format* dns = DNS_DeSerialize(buffer.data, buffer.size);
+	if (dns == NULL)
+		return 0;
 
 	for (uint32_t i = 0; i < configuration.size; i++)
 	{
@@ -55,8 +54,11 @@ static void blacklist_check()
 	}
 
 	buffer.size = DNS_Serialize(buffer.data, MAXBUF);
+	query = dns->Queries_Size;
 
 	DNS_Free();
+
+	return query;
 }
 
 static void task(int fd_server, int fd_client)
@@ -83,9 +85,10 @@ static void task(int fd_server, int fd_client)
 
 		buffer.size = recvfrom(fd_server, buffer.data, MAXBUF, 0, (struct sockaddr *)&local, &server_len);
 
-		blacklist_check();
-
 		dump("Send to dns server:\n");
+		if (blacklist_check() == 0)
+			continue;
+
 		sendto(fd_client, buffer.data, buffer.size, 0, (struct sockaddr*)NULL, sizeof(remote));
 
 		struct timeval c_timeout = {1, 0};

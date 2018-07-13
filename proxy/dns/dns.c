@@ -101,8 +101,11 @@ struct DNS_Format* DNS_DeSerialize(uint8_t *data, uint32_t size)
 	dns.Additionals_Size = data[10];
 	dns.Additionals_Size |= data[11];
 
-	dns.Queries = (struct DNS_Request *)malloc(dns.Queries_Size * sizeof(struct DNS_Request));
-	dns.Answers = (struct DNS_Answer *)malloc(dns.Answers_Size * sizeof(struct DNS_Answer));
+	if (dns.Queries_Size != 0)
+		dns.Queries = (struct DNS_Request *)malloc(dns.Queries_Size * sizeof(struct DNS_Request));
+
+	if (dns.Answers_Size != 0)
+		dns.Answers = (struct DNS_Answer *)malloc(dns.Answers_Size * sizeof(struct DNS_Answer));
 
 	uint32_t domain_size = Get_DNS_Domain_Name_Size(&data[start_data_field], size - start_data_field, 0);
 
@@ -117,16 +120,16 @@ struct DNS_Format* DNS_DeSerialize(uint8_t *data, uint32_t size)
 			return NULL;
 
 		uint32_t j = 0;
-		uint32_t size = 0;
+		uint32_t s = 0;
 		uint32_t current_domain_size = 0;
 		while (current_domain_size != domain_size)
 		{
-			size = Get_DNS_Domain_Name_Size(&data[start_data_field], size - start_data_field, ++j);
+			s = Get_DNS_Domain_Name_Size(&data[start_data_field], size - start_data_field, ++j);
 
-			strncpy((char*)&dns.Queries[i].Request_Name[current_domain_size], (char*)&data[start_data_field + 1 + current_domain_size], size);
-			dns.Queries[i].Request_Name[size + current_domain_size++] = '.';
+			strncpy((char*)&dns.Queries[i].Request_Name[current_domain_size], (char*)&data[start_data_field + 1 + current_domain_size], s);
+			dns.Queries[i].Request_Name[s + current_domain_size++] = '.';
 
-			current_domain_size += size;
+			current_domain_size += s;
 		}
 		dns.Queries[i].Request_Name[domain_size - 1] = 0x00;
 		dns.Queries[i].Request_Type = data[start_data_field + domain_size + 1] << 8;
@@ -168,8 +171,12 @@ struct DNS_Format* DNS_DeSerialize(uint8_t *data, uint32_t size)
 
 	uint32_t start_other_field = start_answers_field;
 	dns.Size = size - start_other_field;
-	dns.Other = (uint8_t *)malloc(dns.Size * sizeof(uint8_t));
-	memcpy(dns.Other, (char*)&data[start_other_field], dns.Size);
+
+	if (dns.Other != 0)
+	{
+		dns.Other = (uint8_t *)malloc(dns.Size * sizeof(uint8_t));
+		memcpy(dns.Other, (char*)&data[start_other_field], dns.Size);
+	}
 
 	return &dns;
 }

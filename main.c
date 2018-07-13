@@ -31,7 +31,7 @@ static uint32_t get_ip_address(const char *section, const char *key)
 {
 	const char *ip_address = ini_get(config, section, key);
 	if (ip_address)
-		return inet_addr(ip_address);
+		return htonl(inet_addr(ip_address));
 
 	return 0x00;
 }
@@ -82,8 +82,6 @@ int main(int argc, char **argv)
 	configuration.remote_address = get_ip_address("dns", "dns_server");
 	configuration.redirect_address = get_ip_address("blacklist", "redirect");
 	get_list();
-
-	DNS_Free();
 
 	ini_free(config);
 
