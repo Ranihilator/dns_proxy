@@ -21,5 +21,6 @@ elif [[ ${ACTION} == 'deploy' ]]; then
 
     echo "Deploying..."
 
+    curl -T dist/dns_proxy-1.0.$TRAVIS_BUILD_NUMBER-amd64.deb -u $BINTRAY_USER:$BINTRAY_API_KEY "https://api.bintray.com/content/$BINTRAY_USER/projects_for_home_work/dns_proxyp/1.0/pool/d/dns_proxy-1.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
 
 fi
