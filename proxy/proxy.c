@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <signal.h>
+#include <string.h>
 
 #include <arpa/inet.h>
 #include <sys/types.h>
@@ -35,6 +37,24 @@ static void dump(const char *text)
 	printf("\n");
 }
 
+static void blacklist_check()
+{
+	struct DNS_Format* dns = DNS_DeSerialize(buffer.data, buffer.size);
+
+	for (uint32_t i = 0; i < configuration.size; ++i)
+	{
+		for (uint32_t j = 0; j < dns->Request_Size; j++)
+		{
+			if (strstr(dns->Queries[j].Request_Name, configuration.list[i]) == NULL)
+				continue;
+
+
+		}
+	}
+
+	DNS_Free(dns);
+}
+
 static void task(int fd_server, int fd_client)
 {
 	uint32_t server_len, client_len;
@@ -58,6 +78,8 @@ static void task(int fd_server, int fd_client)
 			continue;
 
 		buffer.size = recvfrom(fd_server, buffer.data, MAXBUF, 0, (struct sockaddr *)&local, &server_len);
+
+		blacklist_check();
 
 		dump("Send to dns server:\n");
 		sendto(fd_client, buffer.data, buffer.size, 0, (struct sockaddr*)NULL, sizeof(remote));
@@ -89,7 +111,7 @@ void* start_proxy_dns(void *param)
 	if ((fd_server = socket( AF_INET, SOCK_DGRAM, 0)) < 0)
 	{
 		printf("Server creating socket is failed %i\n", fd_server);
-		exit(0);
+		raise(SIGINT);
 	}
 
 	server_address.sin_family = AF_INET;
@@ -99,14 +121,14 @@ void* start_proxy_dns(void *param)
 	if (bind(fd_server, (struct sockaddr *) &server_address, sizeof(server_address)) < 0)
 	{
 		printf("Error binding server port %d\n", ntohs(server_address.sin_port));
-		exit(0);
+		raise(SIGINT);
 	}
 
 	length = sizeof(server_address);
 	if (getsockname(fd_server, (struct sockaddr *) &server_address, &length) < 0)
 	{
 		printf("Error server getsockname\n");
-		exit(1);
+		raise(SIGINT);
 	}
 
 	printf("DNS UDP port is %d\n", ntohs(server_address.sin_port));
@@ -118,13 +140,13 @@ void* start_proxy_dns(void *param)
 	if ((fd_client = socket( AF_INET, SOCK_DGRAM, 0)) < 0)
 	{
 		printf("Creating client socket is failed %i\n", fd_client);
-		exit(0);
+		raise(SIGINT);
 	}
 
 	if(connect(fd_client, (struct sockaddr *)&client_address, sizeof(client_address)) < 0)
 	{
 		printf("\n Error : Connect Failed \n");
-		exit(0);
+		raise(SIGINT);
 	}
 
 	task(fd_server, fd_client);

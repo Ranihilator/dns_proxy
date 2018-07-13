@@ -2,5 +2,5 @@
 
 #include "type.h"
 
-void DNS_Serialize();
-void DNS_DeSerialize();
+struct DNS_Format* DNS_DeSerialize(uint8_t *data, uint32_t size);
+void DNS_Free(struct DNS_Format* format);

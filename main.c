@@ -87,7 +87,7 @@ int main(int argc, char **argv)
 
 	pthread_create(&proxy_dns, NULL, start_proxy_dns, NULL);
 
-	while (1)
+	while(1)
 	{}
 	/*while ((result = getopt(argc, argv, "P:p:c:")) != -1)
 	{
