@@ -37,26 +37,22 @@ static void dump(const char *text)
 	printf("\n");
 }
 
-enum DNS_STATUS blacklist_check()
+static void blacklist_check()
 {
 	struct DNS_Format* dns = DNS_DeSerialize(buffer.data, buffer.size);
 
-	for (uint32_t i = 0; i < configuration.size; ++i)
+	for (uint32_t i = 0; i < configuration.size; i++)
 	{
-		for (uint32_t j = 0; j < dns->Queries_Size; j++)
-		{
-			if (strstr(dns->Queries[j].Request_Name, configuration.list[i]) == NULL)
-				continue;
+		const char* path = DNS_Find_Queries(configuration.list[i]);
 
-			if (configuration.redirect_address == 0xFFFFFFFF)
-				return BLOCK_DNS;
-			else
-				return REDIRECT_DNS;
-		}
+		if (path == NULL)
+			continue;
+
+		if (configuration.redirect_address == 0xFFFFFFFF)
+			DNS_Remove_Queries(configuration.list[i]);
+		else
+			DNS_Redirect_Answers(configuration.list[i], configuration.redirect_address);
 	}
-
-	DNS_Free(dns);
-	return PASS_DNS;
 }
 
 static void task(int fd_server, int fd_client)
@@ -83,23 +79,7 @@ static void task(int fd_server, int fd_client)
 
 		buffer.size = recvfrom(fd_server, buffer.data, MAXBUF, 0, (struct sockaddr *)&local, &server_len);
 
-		/*enum DNS_STATUS status = blacklist_check();
-
-		switch (status)
-		{
-			case BLOCK_DNS:
-				continue;
-				break;
-
-			case REDIRECT_DNS:
-				break;
-
-			case PASS_DNS:
-				break;
-
-			default:
-			{continue;}
-		}*/
+		blacklist_check();
 
 		dump("Send to dns server:\n");
 		sendto(fd_client, buffer.data, buffer.size, 0, (struct sockaddr*)NULL, sizeof(remote));

@@ -310,12 +310,48 @@ void DNS_Redirect_Answers(const char* name, uint32_t ip_address)
 	if (dns.Queries_Size == 0)
 		return;
 
+	uint32_t count = 0;
 	for (uint32_t i = 0; i < dns.Queries_Size; ++i)
 	{
 		const char* path = strstr(dns.Queries[i].Request_Name, name);
 		if (path != NULL)
-		{
-
-		}
+			count++;
 	}
+
+	if (count == 0)
+		return;
+
+	struct DNS_Answer *Answers = (struct DNS_Answer *)malloc((dns.Answers_Size + count) * sizeof(struct DNS_Answer));
+
+	if (Answers == NULL)
+		return;
+
+	for (uint32_t i = 0; i < dns.Answers_Size; ++i)
+	{
+		Answers[i].Class = dns.Answers[i].Class;
+		Answers[i].Type = dns.Answers[i].Type;
+		Answers[i].Length = dns.Answers[i].Length;
+		Answers[i].Name_Offset = dns.Answers[i].Name_Offset;
+		Answers[i].TTL = dns.Answers[i].TTL;
+		Answers[i].Data = dns.Answers[i].Data;
+	}
+	free(dns.Answers);
+
+	dns.Answers = Answers;
+
+	for (uint32_t i = dns.Answers_Size; i < dns.Answers_Size + count; i++)
+	{
+		Answers[i].Class = 0x01;
+		Answers[i].Type = 0x01;
+		Answers[i].Length = 0x04;
+		Answers[i].Name_Offset = 0xc00c;
+		Answers[i].TTL = 300;
+		Answers[i].Data = (uint8_t *)malloc(Answers[i].Length * sizeof(uint8_t));
+		Answers[i].Data[0] = ip_address >> 24;
+		Answers[i].Data[1] = ip_address >> 16;
+		Answers[i].Data[2] = ip_address >> 8;
+		Answers[i].Data[3] = ip_address;
+	}
+
+	dns.Answers_Size += count;
 }
