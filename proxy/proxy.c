@@ -53,6 +53,10 @@ static void blacklist_check()
 		else
 			DNS_Redirect_Answers(configuration.list[i], configuration.redirect_address);
 	}
+
+	buffer.size = DNS_Serialize(buffer.data, MAXBUF);
+
+	DNS_Free();
 }
 
 static void task(int fd_server, int fd_client)
