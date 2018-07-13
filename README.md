@@ -11,9 +11,8 @@ DNS Proxy with blacklist filter test task
    cmake --build build
    cmake --build build --target helloworld_test
    cmake --build build --target package
-   sh -c 'cd build && ctest -V'
    doxygen
-   dns_proxy
+   build/dns_proxy
 ```
 
 ## Debian, Ubuntu install
@@ -23,4 +22,3 @@ DNS Proxy with blacklist filter test task
     echo "deb https://dl.bintray.com/ranihilator/projects_for_home_work trusty main" | sudo tee -a /etc/apt/sources.list
     sudo apt-get update && sudo apt-get install dns_proxy
 ```
-

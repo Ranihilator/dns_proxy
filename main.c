@@ -25,7 +25,7 @@ void signal_handler(int _signal);
 pthread_t proxy_dns;
 struct Proxy_Configuration configuration =
 {
-	.dns_port = 53,
+	.dns_port = 5300,
 	.local_address = 0x00000000,
 	.remote_address = 0x08080808,
 	.redirect_address = 0xFFFFFFFF,
