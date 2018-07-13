@@ -1,6 +1,7 @@
 #### DNS Proxy
 
 [![Build Status](https://travis-ci.org/Ranihilator/dns_proxy.svg?branch=master)](https://travis-ci.org/Ranihilator/dns_proxy)
+[DOCUMENTATION](https://ranihilator.github.io/dns_proxy/index.html)
 
 DNS Proxy with blacklist filter test task
 
@@ -23,4 +24,3 @@ DNS Proxy with blacklist filter test task
     sudo apt-get update && sudo apt-get install dns_proxy
 ```
 
-[docs](https://ranihilator.github.io/dns_proxy/index.html)
