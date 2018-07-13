@@ -1,0 +1,6 @@
+<map id="main" name="main">
+<area shape="rect" id="node2" href="$main_8c.html#a07dd838f5f9686db8a837bef34c7843e" title="signal_handler" alt="" coords="105,5,210,32"/>
+<area shape="rect" id="node3" href="$ini_8c.html#aeec03b2bf8eb77f668ae93e777043e4f" title="ini_load" alt="" coords="124,56,191,83"/>
+<area shape="rect" id="node4" href="$ini_8c.html#a2887349c4af5ed21f8c358cbad90b72a" title="ini_sget" alt="" coords="124,107,191,133"/>
+<area shape="rect" id="node5" href="$ini_8c.html#ab7de8b514a0b7856ff783beef0819dc0" title="ini_get" alt="" coords="259,107,319,133"/>
+</map>
