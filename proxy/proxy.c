@@ -37,9 +37,6 @@ static void dump(const char *text)
 	printf("\n\n");
 }
 
-/*
-*/
-
 static uint32_t blacklist_no_resolved()
 {
 	uint32_t queries = 0;
