@@ -342,6 +342,7 @@ void DNS_Redirect_Answers(const char* name, uint32_t ip_address)
 		Answers[i].TTL = dns.Answers[i].TTL;
 		Answers[i].Data = dns.Answers[i].Data;
 	}
+
 	free(dns.Answers);
 
 	dns.Answers = Answers;

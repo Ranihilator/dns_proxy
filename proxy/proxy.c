@@ -32,9 +32,12 @@ static void dump(const char *text)
 	printf("\n\n");
 }
 
-static uint32_t blacklist_check()
+/*
+*/
+
+static uint32_t blacklist_no_resolved()
 {
-	uint32_t query = 0;
+	uint32_t queries = 0;
 
 	struct DNS_Format* dns = DNS_DeSerialize(buffer.data, buffer.size);
 	if (dns == NULL)
@@ -47,18 +50,41 @@ static uint32_t blacklist_check()
 		if (path == NULL)
 			continue;
 
-		if (configuration.redirect_address == 0xFFFFFFFF)
-			DNS_Remove_Queries(configuration.list[i]);
-		else
-			DNS_Redirect_Answers(configuration.list[i], configuration.redirect_address);
+		DNS_Remove_Queries(configuration.list[i]);
 	}
 
 	buffer.size = DNS_Serialize(buffer.data, MAXBUF);
-	query = dns->Queries_Size;
+	queries = dns->Queries_Size;
+	DNS_Free();
+
+	return queries;
+}
+
+static uint32_t blacklist_redirect()
+{
+	uint32_t blocks = 0;
+
+	struct DNS_Format* dns = DNS_DeSerialize(buffer.data, buffer.size);
+	if (dns == NULL)
+		return 0;
+
+	for (uint32_t i = 0; i < configuration.size; i++)
+	{
+		const char* path = DNS_Find_Queries(configuration.list[i]);
+
+		if (path == NULL)
+			continue;
+
+		blocks++;
+
+		DNS_Redirect_Answers(configuration.list[i], configuration.redirect_address);
+	}
+
+	buffer.size = DNS_Serialize(buffer.data, MAXBUF);
 
 	DNS_Free();
 
-	return query;
+	return blocks;
 }
 
 static void task(int fd_server, int fd_client)
@@ -86,8 +112,21 @@ static void task(int fd_server, int fd_client)
 		buffer.size = recvfrom(fd_server, buffer.data, MAXBUF, 0, (struct sockaddr *)&local, &server_len);
 
 		dump("Send to dns server:\n");
-		if (blacklist_check() == 0)
-			continue;
+
+		if (configuration.redirect_address == 0xFFFFFFFF)
+		{
+			if (blacklist_no_resolved() == 0)
+				continue;
+		}
+		else
+		{
+			if (blacklist_redirect() != 0)
+			{
+				dump("Send to dns client:\n");
+				sendto(fd_server, buffer.data, buffer.size, 0, (struct sockaddr *)&local, sizeof(local));
+				continue;
+			}
+		}
 
 		sendto(fd_client, buffer.data, buffer.size, 0, (struct sockaddr*)NULL, sizeof(remote));
 

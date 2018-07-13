@@ -27,13 +27,13 @@ struct Proxy_Configuration configuration =
 
 ini_t *config;
 
-static uint32_t get_ip_address(const char *section, const char *key)
+static uint32_t get_ip_address(const char *section, const char *key, uint32_t _default)
 {
 	const char *ip_address = ini_get(config, section, key);
 	if (ip_address)
 		return htonl(inet_addr(ip_address));
 
-	return 0x00;
+	return _default;
 }
 
 static void get_list()
@@ -78,10 +78,22 @@ int main(int argc, char **argv)
 
 	ini_sget(config, "dns", "dns_port", "%u", &configuration.dns_port);
 
-	configuration.local_address = get_ip_address("dns", "dns_local");
-	configuration.remote_address = get_ip_address("dns", "dns_server");
-	configuration.redirect_address = get_ip_address("blacklist", "redirect");
+	configuration.local_address = get_ip_address("dns", "dns_local", 0x00);
+	configuration.remote_address = get_ip_address("dns", "dns_server", 0x08080808);
+	configuration.redirect_address = get_ip_address("blacklist", "redirect", 0xFFFFFFFF);
 	get_list();
+
+	uint8_t data[23] = {0x5e,0x4c,0x1,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x0,0x2,0x37,0x34,0x2,0x72,0x75,0x0,0x0,0x1,0x0,0x1};
+	uint8_t data_c[23];
+	struct DNS_Format* format = DNS_DeSerialize(data, 23);
+
+	DNS_Remove_Queries("ya.ru");
+
+	DNS_Serialize(data_c, 23);
+
+	int n = memcmp(data, data_c, 23);
+
+	DNS_Free();
 
 	ini_free(config);
 
@@ -89,5 +101,6 @@ int main(int argc, char **argv)
 
 	while(1)
 	{}
+
 	return 0;
 }
