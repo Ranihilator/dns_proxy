@@ -83,6 +83,19 @@ int main(int argc, char **argv)
 	configuration.redirect_address = get_ip_address("blacklist", "redirect");
 	get_list();
 
+	uint8_t data[70] = "\x76\x45\x81\x80\x00\x01\x00\x02\x00\x00\x00\x01\x05\x67\x6d\x61" \
+					"\x69\x6c\x03\x63\x6f\x6d\x00\x00\x01\x00\x01\xc0\x0c\x00\x01\x00" \
+					"\x01\x00\x00\x01\x2c\x00\x04\x4a\x7d\xe8\xb5\xc0\x0c\x00\x01\x00" \
+					"\x01\x00\x00\x01\x2c\x00\x04\x4a\x7d\xe8\xb6\x00\x00\x29\x10\x00" \
+					"\x00\x00\x00\x00\x00\x00";
+
+	uint8_t data_c[70];
+	struct DNS_Format* format = DNS_DeSerialize(data, 70);
+
+	DNS_Serialize(data_c, 70);
+
+	DNS_Free();
+
 	ini_free(config);
 
 	pthread_create(&proxy_dns, NULL, start_proxy_dns, NULL);

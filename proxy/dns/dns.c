@@ -45,20 +45,25 @@ static uint32_t Get_DNS_Domain_Name_Size(uint8_t *data, uint32_t size, uint32_t 
 	return dns_size;
 }
 
-void DNS_Free(struct DNS_Format* format)
+void DNS_Free()
 {
-	if (format == NULL)
-		return;
-
-	for (uint32_t i = 0; i < dns.Request_Size; ++i)
+	if (dns.Queries != NULL)
 	{
-		if (dns.Queries == NULL)
-			return;
-
-		free(dns.Queries[i].Request_Name);
+		for (uint32_t i = 0; i < dns.Queries_Size; ++i)
+			free(dns.Queries[i].Request_Name);
 
 		free(dns.Queries);
 	}
+
+	if (dns.Answers != NULL)
+	{
+		for (uint32_t i = 0; i < dns.Answers_Size; ++i)
+			free(dns.Answers[i].Data);
+
+		free(dns.Answers);
+	}
+
+	free(dns.Other);
 }
 
 struct DNS_Format* DNS_DeSerialize(uint8_t *data, uint32_t size)
@@ -84,24 +89,28 @@ struct DNS_Format* DNS_DeSerialize(uint8_t *data, uint32_t size)
 	dns.Flags.NUL = (data[3] & 0x70) >> 4;
 	dns.Flags.rcode = (data[3] & 0x0F);
 
-	dns.Request_Size = data[4] << 8;
-	dns.Request_Size |= data[5];
+	dns.Queries_Size = data[4] << 8;
+	dns.Queries_Size |= data[5];
 
-	dns.Answer_Size = data[6] << 8;
-	dns.Answer_Size |= data[7];
+	dns.Answers_Size = data[6] << 8;
+	dns.Answers_Size |= data[7];
 
-	dns.Access_Size = data[8] << 8;
-	dns.Access_Size |= data[9];
+	dns.Authority_Size = data[8] << 8;
+	dns.Authority_Size |= data[9];
 
-	dns.Addons_Size = data[10];
-	dns.Addons_Size |= data[11];
+	dns.Additionals_Size = data[10];
+	dns.Additionals_Size |= data[11];
 
-	if (dns.Request_Size == 0)
+	if (dns.Queries_Size == 0)
 		return NULL;
 
-	dns.Queries = (struct DNS_Request *)malloc(dns.Request_Size * sizeof(struct DNS_Request));
+	dns.Queries = (struct DNS_Request *)malloc(dns.Queries_Size * sizeof(struct DNS_Request));
+	dns.Answers = (struct DNS_Answer *)malloc(dns.Answers_Size * sizeof(struct DNS_Answer));
 
-	if (dns.Queries == NULL)
+	if (dns.Queries == NULL && dns.Queries_Size != 0)
+		return NULL;
+
+	if (dns.Answers == NULL && dns.Answers_Size != 0)
 		return NULL;
 
 	uint32_t domain_size = Get_DNS_Domain_Name_Size(&data[start_data_field], size - start_data_field, 0);
@@ -109,7 +118,7 @@ struct DNS_Format* DNS_DeSerialize(uint8_t *data, uint32_t size)
 	if (domain_size == 0)
 		return NULL;
 
-	for (uint32_t i = 0; i < dns.Request_Size; ++i)
+	for (uint32_t i = 0; i < dns.Queries_Size; ++i)
 	{
 		dns.Queries[i].Request_Name = (char *)malloc(domain_size * sizeof(char));
 
@@ -128,13 +137,58 @@ struct DNS_Format* DNS_DeSerialize(uint8_t *data, uint32_t size)
 
 			current_domain_size += size;
 		}
-		dns.Queries[i].Request_Name[current_domain_size - 1] = 0x00;
-		dns.Queries[i].Request_Type = data[start_data_field + current_domain_size + 1] << 8;
-		dns.Queries[i].Request_Type |= data[start_data_field + current_domain_size + 2];
+		dns.Queries[i].Request_Name[domain_size - 1] = 0x00;
+		dns.Queries[i].Request_Type = data[start_data_field + domain_size + 1] << 8;
+		dns.Queries[i].Request_Type |= data[start_data_field + domain_size + 2];
 
-		dns.Queries[i].Request_Class = data[start_data_field + current_domain_size + 3] << 8;
-		dns.Queries[i].Request_Class |= data[start_data_field + current_domain_size + 4];
+		dns.Queries[i].Request_Class = data[start_data_field + domain_size + 3] << 8;
+		dns.Queries[i].Request_Class |= data[start_data_field + domain_size + 4];
 	}
 
+	uint32_t start_answers_field = start_data_field + domain_size + 5;
+	for (uint32_t i = 0; i < dns.Answers_Size; ++i)
+	{
+		dns.Answers[i].Name_Offset = data[start_answers_field++] << 8;
+		dns.Answers[i].Name_Offset |= data[start_answers_field++];
+
+		dns.Answers[i].Type = data[start_answers_field++] << 8;
+		dns.Answers[i].Type |= data[start_answers_field++];
+
+		dns.Answers[i].Class = data[start_answers_field++] << 8;
+		dns.Answers[i].Class |= data[start_answers_field++];
+
+		dns.Answers[i].TTL = data[start_answers_field++] << 24;
+		dns.Answers[i].TTL |= data[start_answers_field++] << 16;
+		dns.Answers[i].TTL |= data[start_answers_field++] << 8;
+		dns.Answers[i].TTL |= data[start_answers_field++];
+
+		dns.Answers[i].Length = data[start_answers_field++] << 8;
+		dns.Answers[i].Length |= data[start_answers_field++];
+
+		if (dns.Answers[i].Length == 0)
+			return NULL;
+
+		dns.Answers[i].Data = (uint8_t *)malloc(dns.Answers[i].Length * sizeof(uint8_t));
+		memcpy(dns.Answers[i].Data, (char*)&data[start_answers_field++], dns.Answers[i].Length);
+		start_answers_field += dns.Answers[i].Length - 1;
+	}
+
+	uint32_t start_other_field = start_answers_field;
+	dns.Other = (uint8_t *)malloc(start_other_field * sizeof(uint8_t));
+	memcpy(dns.Other, (char*)&data[start_other_field], size - start_other_field);
+
 	return &dns;
+}
+
+uint32_t DNS_Serialize(uint8_t *data, uint32_t max)
+{
+	const uint8_t start_data_field = 12;
+	uint32_t size = 0;
+
+	if (data == NULL)
+		return 0;
+
+
+
+	return size;
 }

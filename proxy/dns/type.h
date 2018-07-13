@@ -29,7 +29,7 @@ struct DNS_Answer
 	uint16_t Class;
 	uint32_t TTL;
 
-	uint16_t Size;
+	uint16_t Length;
 	uint8_t *Data;
 };
 
@@ -38,14 +38,13 @@ struct DNS_Format
 	uint16_t Identification;
 	struct DNS_Flags Flags;
 
-	uint16_t Request_Size;
-	uint16_t Answer_Size;
-	uint16_t Access_Size;
-	uint16_t Addons_Size;
+	uint16_t Queries_Size;
+	uint16_t Answers_Size;
+	uint16_t Authority_Size;
+	uint16_t Additionals_Size;
 
 	struct DNS_Request *Queries;
-	struct DNS_Answer *Answer;
+	struct DNS_Answer *Answers;
 
-	uint8_t *Access_Records;
-	uint8_t *Additional_Records;
+	uint8_t *Other;
 };
