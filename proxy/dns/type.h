@@ -47,4 +47,5 @@ struct DNS_Format
 	struct DNS_Answer *Answers;
 
 	uint8_t *Other;
+	uint8_t Size;
 };

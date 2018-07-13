@@ -83,7 +83,7 @@ static void task(int fd_server, int fd_client)
 
 		buffer.size = recvfrom(fd_server, buffer.data, MAXBUF, 0, (struct sockaddr *)&local, &server_len);
 
-		enum DNS_STATUS status = blacklist_check();
+		/*enum DNS_STATUS status = blacklist_check();
 
 		switch (status)
 		{
@@ -99,7 +99,7 @@ static void task(int fd_server, int fd_client)
 
 			default:
 			{continue;}
-		}
+		}*/
 
 		dump("Send to dns server:\n");
 		sendto(fd_client, buffer.data, buffer.size, 0, (struct sockaddr*)NULL, sizeof(remote));
