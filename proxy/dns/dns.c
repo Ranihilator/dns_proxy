@@ -188,7 +188,34 @@ uint32_t DNS_Serialize(uint8_t *data, uint32_t max)
 	if (data == NULL)
 		return 0;
 
+	data[size++] = dns.Identification >> 8;
+	data[size++] = dns.Identification;
 
+	uint8_t flags = 0;
+
+	flags = dns.Flags.QR << 7;
+	flags |= dns.Flags.opcode << 6;
+	flags |= dns.Flags.AA << 2;
+	flags |= dns.Flags.TC << 1;
+	flags |= dns.Flags.RD;
+	data[size++] = flags;
+
+	flags = dns.Flags.RA << 7;
+	flags |= dns.Flags.NUL << 6;
+	flags |= dns.Flags.rcode << 3;
+	data[size++] = flags;
+
+	data[size++] = dns.Queries_Size >> 8;
+	data[size++] = dns.Queries_Size;
+
+	data[size++] = dns.Answers_Size >> 8;
+	data[size++] = dns.Answers_Size;
+
+	data[size++] = dns.Authority_Size >> 8;
+	data[size++] = dns.Authority_Size;
+
+	data[size++] = dns.Additionals_Size >> 8;
+	data[size++] = dns.Additionals_Size;
 
 	return size;
 }
