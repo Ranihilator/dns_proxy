@@ -9,7 +9,6 @@ DNS Proxy with blacklist filter test task
 ```shell
    cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Release
    cmake --build build
-   cmake --build build --target helloworld_test
    cmake --build build --target package
    doxygen
    build/dns_proxy
